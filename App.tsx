@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,37 +7,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  label: {
-    fontSize: 32,
-  },
 });
 
-export default function App() {
-  const [count1, setCount1] = React.useState(0);
-  const [count2, setCount2] = React.useState(0);
-
+const A = () => {
   React.useEffect(() => {
-    Alert.alert('count1 is incremented.');
-  }, [count1, count2]);
+    console.log('A effect');
+    return () => console.log('A cleanup');
+  });
+
+  return <Text>A</Text>;
+};
+
+const B = () => {
+  React.useEffect(() => {
+    console.log('B effect');
+    return () => console.log('B cleanup');
+  });
+
+  return <Text>B</Text>;
+};
+
+export default function App() {
+  const [needsToShowA, setNeedsToShowA] = React.useState(true);
 
   return (
     <View style={styles.container}>
-      <Text
-        onPress={() => {
-          setCount1(count1 + 1);
-        }}
-        style={styles.label}
-      >
-        {count1}
-      </Text>
-      <Text
-        onPress={() => {
-          setCount2(count2 + 1);
-        }}
-        style={styles.label}
-      >
-        {count2}
-      </Text>
+      <Text onPress={() => setNeedsToShowA(!needsToShowA)}>切り替え</Text>
+      {needsToShowA ? <A /> : <B />}
     </View>
   );
 }
