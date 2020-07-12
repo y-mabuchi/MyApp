@@ -1,39 +1,71 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+const lightTheme = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
+    color: 'black',
+  },
+  label: {
+    backgroundColor: 'white',
+    color: 'black',
   },
 });
 
-const A = () => {
-  React.useEffect(() => {
-    console.log('A effect');
-    return () => console.log('A cleanup');
-  });
+const darkTheme = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    color: 'white',
+  },
+  label: {
+    backgroundColor: 'black',
+    color: 'white',
+  },
+});
 
-  return <Text>A</Text>;
-};
+type Theme = typeof lightTheme | typeof darkTheme;
 
-const B = () => {
-  React.useEffect(() => {
-    console.log('B effect');
-    return () => console.log('B cleanup');
-  });
+interface Context {
+  theme: Theme;
+  setTheme: (newTheme: Theme) => void;
+}
 
-  return <Text>B</Text>;
-};
+const ThemeContext = React.createContext<Context>({
+  theme: lightTheme,
+  setTheme: (_: typeof lightTheme | typeof darkTheme) => {},
+});
+
+interface Props {
+  name: string;
+}
+
+function Profile(props: Props) {
+  const { theme } = React.useContext(ThemeContext);
+  return <Text style={theme.label}>{props.name}</Text>;
+}
 
 export default function App() {
-  const [needsToShowA, setNeedsToShowA] = React.useState(true);
+  const [theme, setTheme] = React.useState(lightTheme);
 
   return (
-    <View style={styles.container}>
-      <Text onPress={() => setNeedsToShowA(!needsToShowA)}>切り替え</Text>
-      {needsToShowA ? <A /> : <B />}
-    </View>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <View style={theme.container}>
+        <Text
+          onPress={() => {
+            setTheme(theme === lightTheme ? darkTheme : lightTheme);
+          }}
+          style={theme.label}
+        >
+          切り替え
+        </Text>
+        <Profile name="januswel" />
+      </View>
+    </ThemeContext.Provider>
   );
 }
