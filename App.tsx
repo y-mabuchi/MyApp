@@ -1,71 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, TextInput, View, StyleSheet } from 'react-native';
 
-const lightTheme = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
-    color: 'black',
   },
-  label: {
-    backgroundColor: 'white',
-    color: 'black',
-  },
-});
-
-const darkTheme = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black',
-    color: 'white',
-  },
-  label: {
-    backgroundColor: 'black',
-    color: 'white',
+  input: {
+    width: 160,
+    height: 32,
+    borderWidth: 1,
+    padding: 4,
   },
 });
-
-type Theme = typeof lightTheme | typeof darkTheme;
-
-interface Context {
-  theme: Theme;
-  setTheme: (newTheme: Theme) => void;
-}
-
-const ThemeContext = React.createContext<Context>({
-  theme: lightTheme,
-  setTheme: (_: typeof lightTheme | typeof darkTheme) => {},
-});
-
-interface Props {
-  name: string;
-}
-
-function Profile(props: Props) {
-  const { theme } = React.useContext(ThemeContext);
-  return <Text style={theme.label}>{props.name}</Text>;
-}
 
 export default function App() {
-  const [theme, setTheme] = React.useState(lightTheme);
+  const ref = React.useRef<TextInput>(null);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <View style={theme.container}>
+    <View style={styles.container}>
+      <TextInput ref={ref} style={styles.input}>
         <Text
           onPress={() => {
-            setTheme(theme === lightTheme ? darkTheme : lightTheme);
+            ref?.current?.focus();
           }}
-          style={theme.label}
         >
-          切り替え
+          focus
         </Text>
-        <Profile name="januswel" />
-      </View>
-    </ThemeContext.Provider>
+      </TextInput>
+    </View>
   );
 }
