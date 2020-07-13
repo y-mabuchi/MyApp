@@ -3,15 +3,26 @@ import { Text, View, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 100,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  base: {
+    fontSize: 24,
+  },
+  bold: {
+    fontWeight: 'bold',
+  },
+  red: {
+    color: 'red',
   },
 });
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>1行目</Text>
-      <Text>2行目</Text>
+      <Text>最初の文章。</Text>
+      <Text>改行されない文章。</Text>
     </View>
   );
 }
