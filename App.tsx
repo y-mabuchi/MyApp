@@ -1,34 +1,17 @@
 import React from 'react';
-import { Text, TextInput, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    width: 160,
-    height: 32,
-    borderWidth: 1,
-    padding: 4,
+    marginTop: 100,
   },
 });
 
 export default function App() {
-  const ref = React.useRef<TextInput>(null);
-
   return (
     <View style={styles.container}>
-      <TextInput ref={ref} style={styles.input}>
-        <Text
-          onPress={() => {
-            ref?.current?.focus();
-          }}
-        >
-          focus
-        </Text>
-      </TextInput>
+      <Text>1行目</Text>
+      <Text>2行目</Text>
     </View>
   );
 }
