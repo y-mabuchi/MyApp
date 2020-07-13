@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Image, PixelRatio } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,13 +16,16 @@ const styles = StyleSheet.create({
   red: {
     color: 'red',
   },
+  imagesize: {
+    width: 400,
+    height: 210,
+  },
 });
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>最初の文章。</Text>
-      <Text>改行されない文章。</Text>
+      <Image source={{ uri: 'https://saku-deli.site/img/tejikomi-tonkatsu.png' }} style={styles.imagesize} />
     </View>
   );
 }
