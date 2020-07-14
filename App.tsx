@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, PixelRatio } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,25 +7,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  base: {
-    fontSize: 24,
-  },
-  bold: {
-    fontWeight: 'bold',
-  },
-  red: {
-    color: 'red',
-  },
-  imagesize: {
+  image: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 400,
     height: 210,
+  },
+  label: {
+    color: 'white',
+    fontSize: 64,
   },
 });
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: 'https://saku-deli.site/img/tejikomi-tonkatsu.png' }} style={styles.imagesize} />
+      <ImageBackground source={require('./logo-uoten.png')} style={styles.image}>
+        <Text style={styles.label}>React Native</Text>
+      </ImageBackground>
     </View>
   );
 }
