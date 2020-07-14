@@ -1,30 +1,35 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    margin: 32,
   },
-  image: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 400,
-    height: 210,
+  block: {
+    width: 300,
+    height: 400,
   },
-  label: {
-    color: 'white',
-    fontSize: 64,
+  red: {
+    backgroundColor: 'red',
+  },
+  green: {
+    backgroundColor: 'green',
+  },
+  blue: {
+    backgroundColor: 'blue',
+  },
+  yellow: {
+    backgroundColor: 'yellow',
   },
 });
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ImageBackground source={require('./logo-uoten.png')} style={styles.image}>
-        <Text style={styles.label}>React Native</Text>
-      </ImageBackground>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={[styles.block, styles.red]}>RED</Text>
+      <Text style={[styles.block, styles.green]}>GREEN</Text>
+      <Text style={[styles.block, styles.blue]}>BLUE</Text>
+      <Text style={[styles.block, styles.yellow]}>YELLOW</Text>
+    </ScrollView>
   );
 }
