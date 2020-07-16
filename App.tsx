@@ -1,34 +1,39 @@
 import React from 'react';
-import { StyleSheet, SectionList, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, TouchableHighlight } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 44,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  label: {
-    color: 'black',
-    backgroundColor: 'white',
-  },
-  sectionHeader: {
-    color: 'white',
-    backgroundColor: 'black',
+  button: {
+    backgroundColor: 'red',
+    width: 300,
+    height: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 8,
   },
 });
 
-const sections = [
-  { title: 'basic', data: ['View', 'Text', 'Image'] },
-  { title: 'list', data: ['FlatList', 'SectionList'] },
-  { title: 'interaction', data: ['Touchable', 'TextInput'] },
-];
-
 export default function App() {
   return (
-    <SectionList
-      style={styles.container}
-      sections={sections}
-      renderItem={({ item }) => <Text style={styles.label}>{item}</Text>}
-      keyExtractor={(_, index) => index.toString()}
-      renderSectionHeader={({ section: { title } }) => <Text style={styles.sectionHeader}>{title}</Text>}
-    />
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          console.log('TouchableOpacity');
+        }}
+      >
+        <View style={styles.button}>
+          <Text>TouchableOpacity</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableHighlight disabled={true} onPress={() => console.log('TouchableHighlight')}>
+        <View style={styles.button}>
+          <Text>TouchableHighlight</Text>
+        </View>
+      </TouchableHighlight>
+    </View>
   );
 }
