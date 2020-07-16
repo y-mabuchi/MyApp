@@ -1,31 +1,34 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, PixelRatio } from 'react-native';
+import { StyleSheet, SectionList, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 44,
   },
-  base: {
-    fontSize: 24,
+  label: {
+    color: 'black',
+    backgroundColor: 'white',
   },
-  bold: {
-    fontWeight: 'bold',
-  },
-  red: {
-    color: 'red',
-  },
-  imagesize: {
-    width: 400,
-    height: 210,
+  sectionHeader: {
+    color: 'white',
+    backgroundColor: 'black',
   },
 });
 
+const sections = [
+  { title: 'basic', data: ['View', 'Text', 'Image'] },
+  { title: 'list', data: ['FlatList', 'SectionList'] },
+  { title: 'interaction', data: ['Touchable', 'TextInput'] },
+];
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: 'https://saku-deli.site/img/tejikomi-tonkatsu.png' }} style={styles.imagesize} />
-    </View>
+    <SectionList
+      style={styles.container}
+      sections={sections}
+      renderItem={({ item }) => <Text style={styles.label}>{item}</Text>}
+      keyExtractor={(_, index) => index.toString()}
+      renderSectionHeader={({ section: { title } }) => <Text style={styles.sectionHeader}>{title}</Text>}
+    />
   );
 }
