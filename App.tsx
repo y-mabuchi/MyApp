@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, TextInput, Text } from 'react-native';
+import { useControlledComponent } from './lib/hooks';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,33 +8,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {
-    backgroundColor: 'red',
-    width: 300,
-    height: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 8,
+  input: {
+    borderWidth: 1,
+    width: 256,
+    padding: 4,
   },
 });
 
 export default function App() {
+  const familyName = useControlledComponent('');
+  const personalName = useControlledComponent('');
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => {
-          console.log('TouchableOpacity');
-        }}
-      >
-        <View style={styles.button}>
-          <Text>TouchableOpacity</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableHighlight disabled={true} onPress={() => console.log('TouchableHighlight')}>
-        <View style={styles.button}>
-          <Text>TouchableHighlight</Text>
-        </View>
-      </TouchableHighlight>
+      <TextInput style={styles.input} {...familyName} />
+      <TextInput style={styles.input} {...personalName} />
+      <Text>
+        {familyName.value} {personalName.value}
+      </Text>
     </View>
   );
 }
