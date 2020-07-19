@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, TouchableHighlight } from 'react-native';
+import { StyleSheet, Switch, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,33 +7,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {
-    backgroundColor: 'red',
-    width: 300,
-    height: 150,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 8,
-  },
 });
 
 export default function App() {
+  const [value, setValue] = React.useState(false);
+
+  function onValueChange(newValue: boolean) {
+    setValue(newValue);
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => {
-          console.log('TouchableOpacity');
-        }}
-      >
-        <View style={styles.button}>
-          <Text>TouchableOpacity</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableHighlight disabled={true} onPress={() => console.log('TouchableHighlight')}>
-        <View style={styles.button}>
-          <Text>TouchableHighlight</Text>
-        </View>
-      </TouchableHighlight>
+      <Switch value={value} onValueChange={onValueChange} />
     </View>
   );
 }
