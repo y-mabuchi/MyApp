@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Switch, View } from 'react-native';
+import { StyleSheet, Alert, View, TouchableOpacity, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,15 +10,30 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
-  const [value, setValue] = React.useState(false);
-
-  function onValueChange(newValue: boolean) {
-    setValue(newValue);
+  function onPress() {
+    Alert.alert('title', 'message', [
+      {
+        text: 'OK',
+        onPress: () => {
+          console.warn('ok');
+        },
+        style: 'default',
+      },
+      {
+        text: 'Cancel',
+        onPress: () => {
+          console.warn('cancel');
+        },
+        style: 'cancel',
+      },
+    ]);
   }
 
   return (
     <View style={styles.container}>
-      <Switch value={value} onValueChange={onValueChange} />
+      <TouchableOpacity onPress={onPress}>
+        <Text>Alert</Text>
+      </TouchableOpacity>
     </View>
   );
 }
